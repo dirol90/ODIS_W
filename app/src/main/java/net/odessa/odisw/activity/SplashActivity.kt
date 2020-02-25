@@ -18,8 +18,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        if(System.currentTimeMillis() < 1583532001000) {
-
+//        if(System.currentTimeMillis() < 1583532001000) {
             et_phone.text = loadPhone().toEditable()
             if (et_phone.text.isNotEmpty()) {
                 val intent = Intent(this, MainActivity::class.java)
@@ -42,10 +41,9 @@ class SplashActivity : AppCompatActivity() {
                 }
 
             }
-        } else {
-            Toast.makeText(this, "ДЕМО ДОСТУП ОКОНЧЕН", Toast.LENGTH_LONG).show()
-        }
-
+//        } else {
+//            Toast.makeText(this, "ДЕМО ДОСТУП ОКОНЧЕН", Toast.LENGTH_LONG).show()
+//        }
     }
 
     fun String.toEditable(): Editable =  Editable.Factory.getInstance().newEditable(this)

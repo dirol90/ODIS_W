@@ -157,7 +157,7 @@ class SettingsActivity : AppCompatActivity() {
         intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
 
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
-            val resInfoList: List<ResolveInfo> = context.getPackageManager()
+            val resInfoList: List<ResolveInfo> = context.packageManager
                 .queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
             for (resolveInfo in resInfoList) {
                 val packageName = resolveInfo.activityInfo.packageName
@@ -168,7 +168,7 @@ class SettingsActivity : AppCompatActivity() {
                 )
             }
         }
-        if (intent.resolveActivity(context.getPackageManager()) != null) {
+        if (intent.resolveActivity(context.packageManager) != null) {
             context.startActivity(intent)
         }
     }
