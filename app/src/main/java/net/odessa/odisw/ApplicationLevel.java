@@ -69,6 +69,28 @@ public class ApplicationLevel extends Application {
         return prefs.getString("preambula_text","M20A");
     }
 
+    static public void saveXHouse(String value) {
+        SharedPreferences.Editor pref = context.getSharedPreferences("X", Context.MODE_PRIVATE).edit();
+        pref.putString("X_text", value);
+        pref.apply();
+    }
+
+    static public String loadXHouse()  {
+        SharedPreferences prefs = context.getSharedPreferences("X", Context.MODE_PRIVATE);
+        return prefs.getString("X_text","46.391308");
+    }
+
+    static public void saveYHouse(String value) {
+        SharedPreferences.Editor pref = context.getSharedPreferences("Y", Context.MODE_PRIVATE).edit();
+        pref.putString("Y_text", value);
+        pref.apply();
+    }
+
+    static public String loadYHouse()  {
+        SharedPreferences prefs = context.getSharedPreferences("Y", Context.MODE_PRIVATE);
+        return prefs.getString("Y_text","30.729012");
+    }
+
     static public List<Request> getDataFromSharedPreferences(){
         Gson gson = new Gson();
         List<Request> RequestFromShared = new ArrayList<>();

@@ -2,10 +2,35 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/splash_bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorYellow"
+    android:background="@color/color_bg_cyan"
     tools:context=".activity.SplashActivity">
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="СПРУТ-GPS"
+        android:textColor="@color/main_violet"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/lamp_iv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/lamp_iv"
+        android:layout_width="164dp"
+        android:layout_height="164dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35000002"
+        app:srcCompat="@drawable/logo_odis" />
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -15,7 +40,8 @@
         android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lamp_iv">
 
         <TextView
             android:id="@+id/textView"
@@ -24,7 +50,7 @@
             android:layout_margin="8dp"
             android:gravity="center"
             android:text="ВВЕДИТЕ ВАШ НОМЕР ТЕЛЕФОНА"
-            android:textColor="@android:color/background_dark"
+            android:textColor="@color/main_violet"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -32,6 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="8dp"
+            android:background="@drawable/rounded_shape"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -41,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="end"
                 android:text="+380"
-                android:textColor="@android:color/background_dark"
+                android:textColor="@color/second_violet"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -53,30 +80,24 @@
                 android:hint="990000000"
                 android:inputType="phone"
                 android:maxLength="9"
-                android:textColor="@android:color/background_dark"
+                android:textColor="@color/main_violet"
+                android:textColorHint="@color/second_violet"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <Button
             android:id="@+id/start_btn"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:background="@color/colorYellowDark"
+            android:background="@drawable/rounded_shape_button"
+            android:shadowColor="#00FFFFFF"
             android:text="ВОЙТИ"
             android:textColor="@android:color/background_light"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:textStyle="bold" />
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/lamp_iv"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/lamp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

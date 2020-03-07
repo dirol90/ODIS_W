@@ -9,15 +9,14 @@ public class Request {
 
     private String time;
     private String sn;
-    private String[] coord = new String[2];
+    private Coord coord;
     private boolean isSended = false;
 
     public Request(long time, String sn, String x, String y){
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         this.time = formatter.format(new Date(time));
         this.sn = sn;
-        coord[0] = "X="+x.replace(".", ",");
-        coord[1] = "Y="+y.replace(".", ",");
+        coord = new Coord(Double.parseDouble(x), Double.parseDouble(y));
     }
 
     public String getTime() {
@@ -36,11 +35,11 @@ public class Request {
         this.sn = sn;
     }
 
-    public String[] getCoord() {
+    public Coord getCoord() {
         return coord;
     }
 
-    public void setCoord(String[] coord) {
+    public void setCoord(Coord coord) {
         this.coord = coord;
     }
 

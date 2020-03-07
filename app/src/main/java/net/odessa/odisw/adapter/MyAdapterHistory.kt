@@ -29,7 +29,7 @@ class MyAdapterHistyory(val items : MutableList<Request>, val context: Context) 
     }
 
     override fun onBindViewHolder(holder: ViewHolderInner, position: Int) {
-        holder.text.text = (position+1).toString()+". "+items[position].time +" "+ items[position].sn +" "+ items[position].coord[0] +" "+ items[position].coord[1]
+        holder.text.text = (position+1).toString()+". "+items[position].time +" "+ items[position].sn +" "+ items[position].coord.lat +" "+ items[position].coord.lng
         if (items[position].isSended){holder.iv_color.setBackgroundResource(R.color.green)} else {holder.iv_color.setBackgroundResource(R.color.red)}
         holder.share_history.setOnClickListener {
             val gson = Gson()

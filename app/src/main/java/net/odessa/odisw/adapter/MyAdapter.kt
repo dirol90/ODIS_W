@@ -27,7 +27,7 @@ class MyAdapter(val items : MutableList<Request>, val context: Context) : Recycl
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.text.text = items[position].time +" "+ items[position].sn +" "+ items[position].coord[0] +" "+ items[position].coord[1]
+        holder.text.text = items[position].time +" "+ items[position].sn +" "+ items[position].coord.lat +" "+ items[position].coord.lng
 
         holder.brn2.setOnClickListener {
 

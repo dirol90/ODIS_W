@@ -70,7 +70,7 @@ public class AsyncHttp extends AsyncTask<Object, Void, Boolean> {
 
             System.out.println(json);
 
-            URL url = new URL(params[0].toString() + "/?f=stat&n=" + params[1].toString());
+            URL url = new URL(params[0].toString() + "/?f=coord&n=" + params[1].toString());
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
             httpURLConnection.setDoOutput(true);
             httpURLConnection.setRequestMethod("POST");

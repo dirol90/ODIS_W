@@ -35,10 +35,12 @@ class SettingsActivity : AppCompatActivity() {
         user_phone_et.text = "380${ApplicationLevel.loadPhone()}"
         server_uri_et.text = ApplicationLevel.loadServerUri().toEditable()
         preambula_et.text = ApplicationLevel.loadPreambula().toEditable()
+        server_house_x.text = ApplicationLevel.loadXHouse().toEditable()
+        server_house_y.text = ApplicationLevel.loadYHouse().toEditable()
 
-        close_btn.setOnClickListener {
-            onBackPressed()
-        }
+//        close_btn.setOnClickListener {
+//            onBackPressed()
+//        }
 
         save_btn.setOnClickListener {
 
@@ -58,7 +60,29 @@ class SettingsActivity : AppCompatActivity() {
                 true
             }
 
-            if (isOkPath && isOkPreambula) {onBackPressed()}
+
+            var isError = true
+            var x: Double? = null
+            var y: Double? = null
+            try {
+                x  = server_house_x.text.toString().toDouble()
+                y  = server_house_y.text.toString().toDouble()
+                isError = false
+            } catch (e: java.lang.Exception){
+
+            }
+
+
+            var isOkHouse: Boolean = if (server_house_x.text.isEmpty() || server_house_y.text.isEmpty() || isError){
+                Toast.makeText(this, "Точка расположения склада пуста, внесите значение!",  Toast.LENGTH_LONG).show()
+                false
+            } else {
+                ApplicationLevel.saveXHouse(server_house_x.text.toString())
+                ApplicationLevel.saveYHouse(server_house_y.text.toString())
+                true
+            }
+
+            if (isOkPath && isOkPreambula && isOkHouse) {onBackPressed()}
         }
 
         send_history_btn.setOnClickListener {
@@ -114,14 +138,18 @@ class SettingsActivity : AppCompatActivity() {
     fun String.toEditable(): Editable =  Editable.Factory.getInstance().newEditable(this)
 
     fun updateRucycler(){
-        ApplicationLevel.requests = ArrayList()
-        ApplicationLevel.requests = ApplicationLevel.getDataFromSharedPreferences()
-        if (ApplicationLevel.requests != null) {
-            val adapter = MyAdapterHistyory(ApplicationLevel.requests!!.asReversed(), this)
-            val linearLayoutManager = LinearLayoutManager(this)
-            rw_history.layoutManager = linearLayoutManager
-            rw_history.adapter = adapter
-        }
+        try {
+            ApplicationLevel.requests = ArrayList()
+            ApplicationLevel.requests = ApplicationLevel.getDataFromSharedPreferences()
+            if (ApplicationLevel.requests != null) {
+                val adapter = MyAdapterHistyory(ApplicationLevel.requests!!.asReversed(), this)
+                val linearLayoutManager = LinearLayoutManager(this)
+                rw_history.layoutManager = linearLayoutManager
+                rw_history.adapter = adapter
+            }
+        } catch (e : Exception){
+        Toast.makeText(this, "Пожалуйста, удалите приложение и установите его заново", Toast.LENGTH_LONG).show()
+        e.printStackTrace()}
     }
 
 
