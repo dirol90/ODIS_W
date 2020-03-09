@@ -15,7 +15,7 @@
         android:text="СПРУТ-GPS"
         android:textColor="@color/main_violet"
         android:textSize="36sp"
-        android:textStyle="bold"
+        app:fontFamily="@font/rubik_mono_one"
         app:layout_constraintBottom_toTopOf="@+id/lamp_iv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +52,7 @@
             android:text="ВВЕДИТЕ ВАШ НОМЕР ТЕЛЕФОНА"
             android:textColor="@color/main_violet"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            app:fontFamily="@font/rubik_mono_one" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -69,8 +69,8 @@
                 android:gravity="end"
                 android:text="+380"
                 android:textColor="@color/second_violet"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="16sp"
+                app:fontFamily="@font/rubik_mono_one" />
 
             <EditText
                 android:id="@+id/et_phone"
@@ -82,8 +82,8 @@
                 android:maxLength="9"
                 android:textColor="@color/main_violet"
                 android:textColorHint="@color/second_violet"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="16sp"
+                app:fontFamily="@font/rubik_mono_one" />
         </LinearLayout>
 
         <Button
@@ -97,7 +97,7 @@
             android:text="ВОЙТИ"
             android:textColor="@android:color/background_light"
             android:textSize="24sp"
-            android:textStyle="bold" />
+            app:fontFamily="@font/rubik_mono_one" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

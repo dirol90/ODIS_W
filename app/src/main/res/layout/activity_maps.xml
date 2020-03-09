@@ -19,15 +19,15 @@
         tools:context=".activity.MapsActivity" />
 
     <ImageView
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_centerInParent="true"
-        android:src="@drawable/lamp"
+        android:src="@drawable/target"
         app:layout_constraintBottom_toBottomOf="@+id/map"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.46" />
+        app:layout_constraintVertical_bias="0.5" />
 
     <Button
         android:id="@+id/select_new_xy"
@@ -43,7 +43,8 @@
         android:enabled="true"
         android:text="ВЫБРАТЬ НОВЫЕ КООРДИНАТЫ"
         android:textColor="@color/color_bg_white"
-        android:textSize="14sp"
+        android:textSize="12sp"
+        app:fontFamily="@font/rubik_mono_one"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

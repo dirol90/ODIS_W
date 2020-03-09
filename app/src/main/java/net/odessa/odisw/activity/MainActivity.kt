@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_settings.*
 import net.odessa.odisw.ApplicationLevel
 import net.odessa.odisw.ApplicationLevel.*
 import net.odessa.odisw.R
@@ -103,6 +104,21 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
+            button_house.setOnClickListener {
+
+                val list = listOf(0, 1)
+                val number = list.random()
+                if (number == 0) {
+                    lastLocation = SingleShotLocationProvider.GPSCoordinates(ApplicationLevel.loadXHouse().toFloat()+0.000005f, ApplicationLevel.loadYHouse().toFloat())
+                } else {
+                    lastLocation = SingleShotLocationProvider.GPSCoordinates(ApplicationLevel.loadXHouse().toFloat(), ApplicationLevel.loadYHouse().toFloat()+0.000005f)
+                }
+
+                ApplicationLevel.saveXHouse(lastLocation!!.latitude.toString())
+                ApplicationLevel.saveYHouse(lastLocation!!.longitude.toString())
+
+                gps_text.text = lastLocation!!.latitude.toString() + "," + lastLocation!!.longitude.toString()
+            }
 
 
         } catch (e : Exception){
@@ -143,20 +159,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun sendBtnStatusListener() {
-        if (isSNOk){
-            button_house.setTextColor(Color.parseColor("#FFFFFFFF"))
-            button_house.setOnClickListener {
-                sendRequest(
-                    ApplicationLevel.loadXHouse(),
-                    ApplicationLevel.loadYHouse()
-                )
-            }
-        } else {
-            button_house.setOnClickListener {
-                Toast.makeText(this, "Не введен серийный номер", Toast.LENGTH_LONG).show()
-            }
-            button_house.setTextColor(Color.parseColor("#512B58"))
-        }
+//        if (isSNOk){
+//            button_house.setTextColor(Color.parseColor("#FFFFFFFF"))
+//            button_house.setOnClickListener {
+//
+//                sendRequest(
+//                    ApplicationLevel.loadXHouse(),
+//                    ApplicationLevel.loadYHouse()
+//                )
+//            }
+//        } else {
+//            button_house.setOnClickListener {
+//                Toast.makeText(this, "Не введен серийный номер", Toast.LENGTH_LONG).show()
+//            }
+//            button_house.setTextColor(Color.parseColor("#512B58"))
+//        }
 
         if (isGPSOk && isSNOk) {
             button.text = "ОТПРАВИТЬ"
