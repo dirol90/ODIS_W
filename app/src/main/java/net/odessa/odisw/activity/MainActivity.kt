@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
 
     var isGPSOk = false
     var isSNOk = false
+    var isStoreHouseLastClick = false
     var adapter: MyAdapter? = null
     var notSendedRequests: MutableList<Request>? = null
 
@@ -48,6 +49,9 @@ class MainActivity : AppCompatActivity() {
             updateRucycler()
 
             gps_update.setOnClickListener {
+
+                isStoreHouseLastClick = false
+
                 isGPSOk = false
                 gps_text.text = "ПОИСК СПУТНИКОВ..."
                 gtp_image_status.setBackgroundResource(R.drawable.baseline_done_grey_18dp)
@@ -98,6 +102,8 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this, MapsActivity::class.java)
                     intent.putExtra("latitude",lastLocation!!.latitude.toString())
                     intent.putExtra("longitude",lastLocation!!.longitude.toString())
+                    intent.putExtra("isStoreHouseLastClick", isStoreHouseLastClick)
+
                     startActivityForResult(intent, SECOND_ACTIVITY_REQUEST_CODE)
                 } else {
                     Toast.makeText(this, "Не выбраны текущие координаты, нажмите кнопку ОБНОВИТЬ", Toast.LENGTH_LONG).show()
@@ -109,15 +115,21 @@ class MainActivity : AppCompatActivity() {
                 val list = listOf(0, 1)
                 val number = list.random()
                 if (number == 0) {
-                    lastLocation = SingleShotLocationProvider.GPSCoordinates(ApplicationLevel.loadXHouse().toFloat()+0.000005f, ApplicationLevel.loadYHouse().toFloat())
+                    lastLocation = SingleShotLocationProvider.GPSCoordinates(ApplicationLevel.loadXHouse().toFloat()+0.00005f, ApplicationLevel.loadYHouse().toFloat())
                 } else {
-                    lastLocation = SingleShotLocationProvider.GPSCoordinates(ApplicationLevel.loadXHouse().toFloat(), ApplicationLevel.loadYHouse().toFloat()+0.000005f)
+                    lastLocation = SingleShotLocationProvider.GPSCoordinates(ApplicationLevel.loadXHouse().toFloat(), ApplicationLevel.loadYHouse().toFloat()+0.00005f)
                 }
 
                 ApplicationLevel.saveXHouse(lastLocation!!.latitude.toString())
                 ApplicationLevel.saveYHouse(lastLocation!!.longitude.toString())
 
+                gtp_image_status.setBackgroundResource(R.drawable.baseline_done_black_18dp)
                 gps_text.text = lastLocation!!.latitude.toString() + "," + lastLocation!!.longitude.toString()
+
+                isStoreHouseLastClick = true
+                isGPSOk = true
+
+                sendBtnStatusListener()
             }
 
 
@@ -176,6 +188,8 @@ class MainActivity : AppCompatActivity() {
 //        }
 
         if (isGPSOk && isSNOk) {
+            isStoreHouseLastClick = false
+
             button.text = "ОТПРАВИТЬ"
             button.isEnabled = true
             button.setTextColor(Color.parseColor("#FFFFFFFF"))
@@ -278,7 +292,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun sendRequest(x: String, y : String){
+
         shadow_ll.visibility = View.VISIBLE
+
         val request = Request(
             System.currentTimeMillis(),
             ApplicationLevel.loadPreambula() + "" + sn_edittext.text,

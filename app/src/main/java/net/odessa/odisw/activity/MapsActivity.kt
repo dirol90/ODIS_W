@@ -12,6 +12,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import kotlinx.android.synthetic.main.activity_maps.*
+import net.odessa.odisw.ApplicationLevel
 import net.odessa.odisw.R
 
 
@@ -19,6 +20,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     var x : String = ""
     var y : String = ""
+    var isStoreHouseLastClick = false
 
     private lateinit var mMap: GoogleMap
 
@@ -28,12 +30,21 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         x=intent.getStringExtra("latitude")!!
         y=intent.getStringExtra("longitude")!!
+
+        isStoreHouseLastClick = intent.getBooleanExtra("isStoreHouseLastClick", false)
+
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
         select_new_xy.setOnClickListener {
             val intent = Intent()
+
+            if (isStoreHouseLastClick){
+                ApplicationLevel.saveXHouse(x)
+                ApplicationLevel.saveYHouse(y)
+            }
+
             intent.putExtra("latitude", x)
             intent.putExtra("longitude", y)
             setResult(Activity.RESULT_OK, intent)

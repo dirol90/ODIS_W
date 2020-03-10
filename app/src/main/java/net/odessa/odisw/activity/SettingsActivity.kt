@@ -35,8 +35,8 @@ class SettingsActivity : AppCompatActivity() {
         user_phone_et.text = "380${ApplicationLevel.loadPhone()}"
         server_uri_et.text = ApplicationLevel.loadServerUri().toEditable()
         preambula_et.text = ApplicationLevel.loadPreambula().toEditable()
-        server_house_x.text = ApplicationLevel.loadXHouse().toEditable()
-        server_house_y.text = ApplicationLevel.loadYHouse().toEditable()
+        server_house_x.text = if (ApplicationLevel.loadXHouse().length > 10) {ApplicationLevel.loadXHouse().substring(0, 10).toEditable()} else {ApplicationLevel.loadXHouse().toEditable()}
+        server_house_y.text =  if (ApplicationLevel.loadYHouse().length > 10) {ApplicationLevel.loadYHouse().substring(0, 10).toEditable()} else {ApplicationLevel.loadYHouse().toEditable()}
 
 //        close_btn.setOnClickListener {
 //            onBackPressed()
