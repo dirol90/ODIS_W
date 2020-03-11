@@ -111,13 +111,12 @@ class MainActivity : AppCompatActivity() {
             }
 
             button_house.setOnClickListener {
-
-                val list = listOf(0, 1)
-                val number = list.random()
-                if (number == 0) {
-                    lastLocation = SingleShotLocationProvider.GPSCoordinates(ApplicationLevel.loadXHouse().toFloat()+0.00005f, ApplicationLevel.loadYHouse().toFloat())
-                } else {
+                if (loadStoreHouseCounter() < 10) {
                     lastLocation = SingleShotLocationProvider.GPSCoordinates(ApplicationLevel.loadXHouse().toFloat(), ApplicationLevel.loadYHouse().toFloat()+0.00005f)
+                    saveStoreHouseCounter(loadStoreHouseCounter()+1)
+                } else {
+                    saveStoreHouseCounter(0)
+                    lastLocation = SingleShotLocationProvider.GPSCoordinates(ApplicationLevel.loadXHouse().toFloat()+0.00005f, ApplicationLevel.loadYHouse().toFloat()-(0.00005f*10))
                 }
 
                 ApplicationLevel.saveXHouse(lastLocation!!.latitude.toString())
@@ -132,10 +131,10 @@ class MainActivity : AppCompatActivity() {
                 sendBtnStatusListener()
             }
 
-
         } catch (e : Exception){
             Toast.makeText(this, "Пожалуйста, удалите приложение и установите его заново", Toast.LENGTH_LONG).show()
-            e.printStackTrace()}
+            e.printStackTrace()
+        }
 
     }
 
@@ -171,24 +170,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun sendBtnStatusListener() {
-//        if (isSNOk){
-//            button_house.setTextColor(Color.parseColor("#FFFFFFFF"))
-//            button_house.setOnClickListener {
-//
-//                sendRequest(
-//                    ApplicationLevel.loadXHouse(),
-//                    ApplicationLevel.loadYHouse()
-//                )
-//            }
-//        } else {
-//            button_house.setOnClickListener {
-//                Toast.makeText(this, "Не введен серийный номер", Toast.LENGTH_LONG).show()
-//            }
-//            button_house.setTextColor(Color.parseColor("#512B58"))
-//        }
 
         if (isGPSOk && isSNOk) {
-            isStoreHouseLastClick = false
 
             button.text = "ОТПРАВИТЬ"
             button.isEnabled = true

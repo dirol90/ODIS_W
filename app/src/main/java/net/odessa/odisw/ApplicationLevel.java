@@ -91,6 +91,18 @@ public class ApplicationLevel extends Application {
         return prefs.getString("Y_text","30.729012");
     }
 
+    static public void saveStoreHouseCounter(int value) {
+        SharedPreferences.Editor pref = context.getSharedPreferences("store", Context.MODE_PRIVATE).edit();
+        pref.putInt("store_value", value);
+        pref.apply();
+    }
+
+    static public int loadStoreHouseCounter()  {
+        SharedPreferences prefs = context.getSharedPreferences("store", Context.MODE_PRIVATE);
+        return prefs.getInt("store_value",0);
+    }
+
+
     static public List<Request> getDataFromSharedPreferences(){
         Gson gson = new Gson();
         List<Request> RequestFromShared = new ArrayList<>();

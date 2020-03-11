@@ -41,6 +41,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             val intent = Intent()
 
             if (isStoreHouseLastClick){
+                ApplicationLevel.saveStoreHouseCounter(0)
                 ApplicationLevel.saveXHouse(x)
                 ApplicationLevel.saveYHouse(y)
             }
